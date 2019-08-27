@@ -1,0 +1,1 @@
+Exploitation and exploration tradeoff. What is generally preferred when the move is not backtrackable? Or when backtracking is possible(meaning a cycle with a zero reward exists) which 
