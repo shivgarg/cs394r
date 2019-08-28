@@ -9,15 +9,21 @@ On Page 8, evolutionary algorithms are mentioned. I had a couple of doubts regar
 
 1.2: We can couple the symmetric states and introduce hard or soft constraints on the value functions. The symmteric states can be forced to have the exact same expected value (hard constraint) or they be constrained by a L1 or L2 loss (soft constrained).
 I believe that the agent should converge quickly since a single update to a state would update all the symmetric states. The agent would require to take less exploratory steps to determine the optimal value in this case.
-If the opponent is not taking advantage of symmetric states, then a hard constraint should not be used. Since opponent might be employing different strategies at symmetric states, it would be beneficial to give the agent a leeway to learn a customised policy for that state. Forcing the agent to perform similarly may be counter productive as the agent might not be able to incorporate different playing strategies of the opponent with the same value function.
+If the opponent is not taking advantage of symmetric states, then a hard constraint should not be used. Since opponent might be employing different strategies at symmetric states, it would be beneficial to give the agent a leeway to learn a customised policy for that state. Forcing the agent to perform similarly may be counter productive as the agent might not be able to incorporate different playing strategies of the opponent.
 
 1.3  The agent will be a worse player(best case can be equally good) than a non greedy player. The greedy player might not get to examine a subset of state space. The unexplored state space might be better in terms of value function.
 
 1.4  In my opinion, the probability when update from exploration phase are applied would indicate the probability of winning from the state by making any move. Since all the moves would be tried sufficient number of times, the estimate of reachability of goal state would incorporate all possible actions from that particular state which will include many sub optimal actions thus lowering the value of the state. The probability when exploratory moves updates are not applied would denote the winning probability when the greedy(not necessary the highest reward one) move is taken at the state. 
 I think the , probabilities without exploratory updates are better to learn. The wins will also be more. Since the values in the former case might be lower than the actual ones, the agent might make wrong decisions to achieve the goal. If an exploratory move is better than the current best one, then the former would choose the exploratory as the best move.
 
-1.5: By using more domain knowledge to evaluate the state value function. Some heuristics function which are give an upper bound over the value function without much exploration can be used to trim the search space thus leading to better and quicker estimates. The design of heuristics would depend a lot on the problem itself.
+1.5: By using more domain knowledge to evaluate the state value function. Some heuristics function which are give an upper/lower bound over the value function without much exploration can be used to trim the search space thus leading to better and quicker estimates. The design of heuristics would depend a lot on the problem itself. 
+
+For Tic-tac-toe, the heuristic function could assign - X X
+		                                     - X -
+	 	                                     - - -
+a value(probability) of 1 since X is guaranteed to win. 
+I am not able to think a good heuristic function for a game of tic tac toe but certainly many better functions can be designed for complex scenarios.
+
   
 
 
-Exploitation and exploration tradeoff. What is generally preferred when the move is not backtrackable? Or when backtracking is possible(meaning a cycle with a zero reward exists) which 
