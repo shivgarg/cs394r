@@ -1,0 +1,66 @@
+Queries: -
+1. How is usually the exploration probability chosen in e-greedy algorithm? Is it something that is finetuned like hyperparameters or are there some methods which help to determine a good e?
+2. How is the stepsize to update value estimates chosen for real problems? 
+3. How to estimate initial value estimates for optimistic greedy algorithm? Does it depend on having prior knowledge?
+or after having some estimate from some trials, setting a higher number based on the estimate? 
+4. In UCB, how is c selected and does c change during runtime?
+5. Are there more functions apart from sqrt(ln(t)/N(a)) which are used? 
+6. On Pg. 37, last line it is mentioned that if baseline is omitted from the update function, then the performance is degraded.
+Could you give the insight why this happens?
+
+Summary
+The Chapter 2 discusses k-armed Bandit Problem in which the reward for an action is decouple from the environmental state.
+Exploitation and exploration aspect were discussed in detail, with different algorithms having distinct methods to achieve the balance.
+The estimate of the value function is determined by the following rule:
+            New_Estimate <- Old_Estimate + Learning_rate(Value - Old_Estimate)
+
+
+The first algorithm discussed to estimate the value is e-greedy algorithm in which exploration is done at which step with a small probability of e.
+With enough steps and by law of large numbers, the estimate of value function will converge.
+If Learning rate is 1/n, where n is the time step, this reduces to simple averaging of samples to determine the mean value.
+The learning rate should follow some bounds to give convergence guarantee.
+
+Sum (Learning_rate) can be infinity but sum(learning_rate^2) < infinity.
+
+The second way to choose actions at each step is by setting optimistic initial values and following exploitation.
+The initial estimates can be used to incorporate some prior information and setting large numbers as initial estimates,
+prods the algorithm to explore more in the greedy phase.
+
+This does not work for non-stationary problems (in which the distribution of rewards changes with each step).
+A constant learning rate is preferred for non-stationary cases, which helps to maintain a weighted average of samples, with more weight given to recent ones.
+Plus, optimistic initial values will not drive the exploration phase for a long time, and exploration steps will die out.
+
+UCB determines the next action based on how uncertain the estimate of action is. 
+It is difficult to extend to non-stationary problems. 
+
+Gradient Bandit Algorithms:
+Learning a score to rank actions which is independent of value estimates. 
+SoftMax used to determine probabilities of an action and action is sampled from the softmax distribution.
+The score is updated in a way similar to gradient descent.
+This can be used for both stationary and non-stationary bandit problems.
+
+In Chapter3, MDPS are discussed.
+Major assumption, a state and action are sufficient to determine the next state and reward.
+The history of actions before the state do not matter for future actions.
+Representations of state and actions matter but they are a matter of choice. Hugely problem dependent.
+Reward function not meant to induce prior knowledge into the agent. 
+The main aim is to maximise the expected return over whole time. 
+Episodic MDPS have a terminal state in which the interaction stops, continual MDP have lifelong interaction.
+The expected return is usually the discounted reward with rewards in the future being discounted by a parameter y.
+State values and state -action values are can be estimated by Monte Carlo methods (averaging over a lot of samples generated while interacting with the environment)
+But main problem with this if the number of states is huge, then it becomes infeasible to calculate per state values.
+Function approximators are used to estimate optimal values for states.
+Bellman equations are used to determine value for each state if the optimal policy is followed.
+It is a set of linear equations which when solved would give values for each state.
+
+A policy is judged better than other policy if the state value function for policy is greater than the value function of other policy for all states.
+Bellman optimal equation determine the optimal policy from the optimal value function. 
+Basic idea is that the optimal value of a state should be equal to maximum of expected return for each action from the state.
+Since the optimal value of state is equal occurs in an optimal policy which should prefer the best action in a state.
+The bellman optimality equation helps to achieve long term reward view in just one step. 
+Shortcomings of determining optimal policy through bellman optimality equations: -
+1. State space too big to explore. A lot of memory and computation power required.
+2. The environment behaviour not known and the estimates of it are always approximate. 
+3. Many problems do not strictly follow markov property.
+
+A lot of heuristics can be developed to trim the search space and to optimise the algorithm.
