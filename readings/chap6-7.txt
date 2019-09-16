@@ -1,0 +1,45 @@
+Q1. Pg 126 Optimality of td(0), wouldnt batch updating induce bias since same experience is being used again 
+and again to estimate the value function? Could you discuss how batch updating is used in practice?
+Q2. Pg 127 There is the line: "The answer is that the Monte Carlo method is optimal only in a limited way, 
+and that TD is optimal in a way that is more relevant to predicting returns" , Could you discuss the optimiality of TD(0) wrt to MC?
+Q3. Pg 128, Could you give the intuition behind why TD(0) estimates maximum likelihood estimate?
+Q4. Pg 133 paragraph above the graph, the line :" Expected Sarsa retains the signiﬁcant advantage of Sarsa over Q-learning on this problem."
+i unclear to me. COuld you please explain sarsa's and expected sarsa's significant advanatge over q-learning.
+Q5. Could you discuss why leaf backup is needed for off policy learning without importance learning?
+
+
+Summary
+TD Learning approximates the return of monte carlo markov methods by taking the reward of the next step
+and discounting the value estimate of the next state.
+This update rule is used to learn the v function.
+    v(s) <-- v(s) + a(R+y*V(s')-v(s)), where s' is the next state, y discount factor, a Learning rate
+
+TD methods converge under the same conditions as MC methods. Plus they have been observed to converge faster.
+
+MC methods find values that minimize the mse loss, whereas TD(0) learns according to the maximum likelihood.
+
+TD(0) methods find the underlying markov chain from the data. This principle is called certainty-equivalence
+estimate. But it is alwyas not feasible to compute the underlying model directly especially when the state space is huge.
+
+SARSA TD(0): estimating q(s,a) function by using one step forward.
+SARSA estimates q for policy pi and then optimizes policy pi wrt q greedily.
+It converges with a probability of one if e-greedy algorithm is used in policy given there are infinute trials.
+
+Q Learning: off policy method to estimate q* directly.
+Convergence guarantees when infinite trials and learning rate follows stochatic approximation conditions. 
+q(s,a) <--- q(s,a)+alpha*(r+y*max q(s',a') - q(s,a))
+The policy has na effect over which states are traversed, but under infinite trails this is guaranteed to 
+converge.
+Expected SARSA: removes the variance of seleting random action a in sarsa.
+Double Learning: Removing the maximisation bias. Two Q functions learned with each being sampled 50% of the times
+to learn thq function.  Both functions are identical and can be interchangeably by algortihms for policy determination.
+
+n-step TD learning relaxes the next step constraint. Instead of using that, next n steps are used to approximate the reward function.
+The value estimate gets updated after n steps since n steps need to be unrolled to calculte the target.
+For sarsa, everything remain same except v , q is estimated.
+In expectation, n step performs better estimates of target than using the value function of the next state.
+This property guarantees the convergence property of the nstep bootstrapping. 
+
+For off policy learning, importance smapling comes into play with everything remaining similar to 
+n step TD , with the update being weighted with the probabilities ratios.
+ Off-policy learning without importance smapling
