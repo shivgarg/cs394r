@@ -1,0 +1,59 @@
+
+Ques1. On pg 84, iterative DP is mentioned. I did not understand how DP can be used in a online way. Since DP assumes perfect knowledge about environment, why experience of agent is necessary?
+Ques2. on Pg 96 , The assumption of exploring starts is sometimes useful, but of course it cannot be relied upon in general, particularly when learning directly from actual interaction with an
+environment. In what way exploring starts is not reliable?
+Ques 3: How is the assumption of coverage constraint applied in reality?
+Ques4: Could you explain the high variance (unstability) problem in importance sampling?
+
+Chapter 4:
+DP methods have limited practical usage because they assume perfect environment information, not feasible in real life problems.
+DP methods are applicable to finite state problems, and can be extended to continuous state by quantizing the state and action space.
+
+Policy evaluation possible only when discount < 1 or under policy pi, termination state is reachable for all states. 
+
+Iterative policy evaluation used to approximate the value function.
+As the number of iterations approach infinity the value function converges to the actual function.
+The bellamn equations ensure the optimality of the solution.
+This method is used instead of solving the n linear equations.
+In place version of iterative policy update converges faster. 
+A lot depends on which states are updated first. 
+The convergence criteria used is the max update in policy values is less than a pre specified theta.
+
+policy improvement uses the q(s,a) to quantify whether an action is better than that suggested by optimal policy.
+If an action is better, then replacing the action of the policy with the said action make  the new policy better than the old one.
+By applying this action again and again, the optimal policy can be determined.
+
+Drawback of policy iteration it involves policy evaluation in each iteration.
+Value iteration uses the bellman optimaltiy equation to determine optimal state values.
+It avoids the heavy computation involving policy evaluation.
+
+Asynchronous DP are used to reduce the computational complexity of the methods.
+One way is to skip some states while policy iteration.
+Another way to to intermix policy evaluation and value iteration.
+These algorithms help in faster convergence since newer values can be utilised as soon as they are available.
+
+
+Monte Carlo methods do not need full information about the environment.
+Basic idea for determining value of a state is by averaging sample returns.
+Two methods to average the state-value function: first visit method and every state method. 
+Both converge to v(pi). But state values not enough to find optimal actions at each state due to incomplete info about environment.
+q(s,a) is determined in a similar way to v(s). The issue is that manys,a pairs may not be reached via the agent.
+So exploration is necessary. One way is to start each episode from a new state and repeating the experiments infinite number of times.
+This would give a good estimate about q(a,s) function. Another way is to ensure that all states are visited is that chossing policies which have non zero prob of selecting all actions in a state.
+
+Policy Iteration for monte carlo works in a similar way to DP chapter.
+In place of v(s) , here q)s,a) is used, since we do not have p(s',r|s,a).
+Loop() {
+    evaluate_policy() ---> Monte Carlo experiments
+    find_better_poilcy() ---> Selecting greedy actions.
+}
+
+Two assumptions:-
+1. Episodes have exploring starts
+2. policy evaluated for infinite number of experiments.
+        can be relaxed with by using some convergence bounds or by using methods similar to value iteration.
+
+Monte carlo estimation can be done without exploring starts also. Basic idea is to define a stochastic policy by defining an e-greedy exploration distrbution.
+This ensures that with infinite experiments each state action pair is encountered enough times to have a decent estimate of the value.
+on-policy learning learns in an approximate way about the optimal behaviour. 
+Off-policy methods better to use since they use two policies, one for exploration and one for optimisation.
