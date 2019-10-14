@@ -5,7 +5,7 @@ and that TD is optimal in a way that is more relevant to predicting returns" , C
 Q3. Pg 128, Could you give the intuition behind why TD(0) estimates maximum likelihood estimate?
 Q4. Pg 133 paragraph above the graph, the line :" Expected Sarsa retains the signiﬁcant advantage of Sarsa over Q-learning on this problem."
 i unclear to me. COuld you please explain sarsa's and expected sarsa's significant advanatge over q-learning.
-Q5. Could you discuss why leaf backup is needed for off policy learning without importance learning?
+Q5. Could you discuss why leaf backup is needed for off policy learning without importance sampling?
 
 
 Summary

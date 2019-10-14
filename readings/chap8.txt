@@ -1,0 +1,11 @@
+Questions:-
+1. How is the model modelled in the start of the process?
+2. Why DynaQ would get stuck in an suboptimal model? Since the actions are sampled according to e-greedy ,
+each state/action pair is expected to be visited. The e-greedy step was the condition for convergence to the best policy.
+3. On Pg. 168, in the footnote, it is mentioned that actions that have never been tried before from a state
+were allowed in the planning step of Dyna Q+, how are these actions chosen, like uniform sampling or something similar to e-greedy?
+3. Wouldnt prioritised sweeping lead to suboptimal solutions? since there is no exploration step built in 
+the algorithm on pg 170.
+4. Could you please discuss RTDP in class? How it converges given the conditions mentioned on Page 178?
+5. Could you please discuss heuristic functions and its applications to planning? Can a beam search kind of thing be applied to 
+the planning stage to prioritise nodes updates?

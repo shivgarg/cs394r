@@ -4,7 +4,7 @@ import sys
 NUM_ARMS = 10
 RUN_LENGTH = 10000
 eps = 0.1
-NUM_TRIALS = 500
+NUM_TRIALS = 300
     
 reward_average = np.zeros(RUN_LENGTH+1)
 opt_action_average = np.zeros(RUN_LENGTH+1)

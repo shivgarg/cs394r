@@ -1,0 +1,32 @@
+Questions:
+1. For the mountain car example on pg 248, (figure 10.4), it has been shown that the number of steps per episode decreases for a particular n 
+but after that it increases, why does this kind of behaviour happen?
+2.  Could you discuss why the discounting factor is not relevant when evaluating the continuous case? especially section 10.4 .
+3. Could you discuss why the off-policy n-step bootstrapping diverges as said in Baird's counterexample ? I couldn't get why DP updates based on 
+uniform distribution lead to diverging estimates for state values.
+
+Summary:
+
+Chapter 10 deals with control using function approximation. 
+The problem is dealt differently for episodic and continual tasks.For episodic tasks, the formulation is very similar 
+to the one discussed for tabular control tasks. Semi-gradient is used to update the weights in the SARSA update step. 
+For policy improvement in continual case or large discrete state spaces case, no clear algo is present. The method
+discussed for tabular case, in which action which most value was chosen does not scale for these types of problem. 
+Average reward setting is discussed for continual problems. The value of a policy is defined as the expected reward 
+achieved when the policy is followed. The assumption is that the steady state distribution exists . In absense of this,
+the average reward of the policy may not exist and depend sharply on initial state distribution. For the average 
+reward setting, the return is defined as the difference between the reward received and the average pulocy reward.
+    Gt = R{t+1} - r(policy)  + R{t+2} - r(policy) + ......
+With this formulation, the analysis for function approximation using SARSA/TD(0)/n-step/Q learning holds for average rewrads too.
+
+For off-policy methods using function approximation, there are two main problems.
+1. The target update is not a correct estimate. This has been handled by importance sampling in the tabular case and it applies equally 
+well in the function approximation case. The TD error is defined appropriately for episodic and continuous task and semi-gradient
+update is used weighted by the importance sampling ratio.
+2. The ratio of the updates is not according to the one target policy would produce. Two apporaches that have been used to tackle this
+    a. Using importance sampling
+    b. True gradient methods which do not require any ditribution of updates for succeed.
+
+With function approximation, bootstrapping updates and off-policy training, convergence is not guaranteed. 
+Any two of the three tricks involved can guarantee stable training. 
+

@@ -1,0 +1,42 @@
+Questions
+1. Which ML algorithms work well with non-stationary data?
+2. In tile coding of features, can you discuss how the learning rate is chosen and how some learning rates lead to one step learning?
+3. How hashing is useful in tiling? How are the tiles(for eg in 2D space) hashed? 
+4. How is memory based function approximator different from tabular methods? They are just evaluating the relative distances between states to evaluate value during inference(planning) time.
+Rest all seems similar to me. Is there any other difference between the two?
+
+Summary
+This chapter is discussing about approximating the value functions of a given policy.
+This is more useful when the state space is huge and it is intractable to store the values for each state.
+Basically, the estimation of value function is reduced to a machine learning problem
+in which value updates are treated as training examples. ML algorithms which learn well with incremental data
+are used. Not all states are given equal importance when approximating the value function.
+SGD is used to learn the approximate function. The learnt parameters will not always be the global minima.
+And under stochastic approximation conditions, the sgd converges.
+In the gradient the value should be an unbiased estimate of the true value.
+Botostrapping based methods like n step bootstrapping and dp methods cant be used for sgdsince 
+the estimate is not independent of w, and hence the gradient is not accuratce.
+but these methos of using inaccurate gradient works well in practise. (Semi gradient methods)
+
+n-step, TD(0), bootstrapping methods all converge with a bound to the actual low estimate.
+Feature engineering plays an important part of how well linear systems perform.
+Each state is represented by a feature vector.  There are different ways of handling features for 
+for a state. It depends a lot on the domain of the problem. 
+Four basic representations were discussed in the chapter: polynomial, coarse, tiling, fourier and radial basis function.
+
+A simple model to estimate values is a linear model in which a weight vector weighs each feature vector to 
+evaluate value of the particular state. ANNs are discussed to be used as non-linear function approximator.
+ANN with a single hidden layer and sufficiently large numebr of neurons with sigmoid can approximate any function.
+But in practice, this optimisation is really hard and instead deep networks are used with various tricks 
+like early-stopping, regularization, weight sharing, batch normalisation, RelU non lineraity, 
+Adam optimiser, dropout etc.
+
+Apart from the parametric function approximator, memory based function approximator are also used.
+Some pros of using it:-
+Value function not constrained by the modelling asumption.
+Learns more accurate values for states that are visited in the trajectory. No need for modelling for states that will not be visited.
+Some cons:-
+Computing value estimates can be slow depending on the the number of entries in the memory table.
+Huge memory requirement.
+
+
