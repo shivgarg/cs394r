@@ -47,7 +47,7 @@ for j in range(NUM_TRIALS):
     opt_action_constant = np.zeros(RUN_LENGTH+1)
 
     mean = np.zeros(NUM_ARMS)
-    var = np.ones(NUM_ARMS)*2
+    var = np.ones(NUM_ARMS)
     qestimates = np.zeros(NUM_ARMS)
     alpha = 0.1
 
@@ -70,5 +70,5 @@ for j in range(NUM_TRIALS):
     reward_alpha = (reward_alpha*j + reward_constant)/(j+1)
     opt_action_alpha = (opt_action_alpha*j + opt_action_constant)/(j+1)
 
-
-np.savetxt(sys.argv[1], (reward_average, opt_action_average, reward_alpha, opt_action_alpha))
+print(len(reward_average[1:]))
+np.savetxt(sys.argv[1], (reward_average[1:], opt_action_average[1:], reward_alpha[1:], opt_action_alpha[1:]))

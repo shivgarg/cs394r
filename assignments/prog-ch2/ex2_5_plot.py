@@ -16,7 +16,7 @@ with open(filename,'r') as f:
     }
 
     assert len(sample_average['average_rs']) == len(sample_average['average_best_action_taken']) == \
-        len(constant['average_rs']) == len(constant['average_best_action_taken']) == 10001
+        len(constant['average_rs']) == len(constant['average_best_action_taken']) == 10000
 
     fig,axes = plt.subplots(2,1)
 
