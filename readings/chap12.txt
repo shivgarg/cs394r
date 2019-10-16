@@ -1,0 +1,42 @@
+Questions:
+1. The eligibility vecttor update rule is similar to momentum in SGD algorithms. Are similar techniques
+used in gradient updates applied to eeligibility traces too? like RMSprop, Adam, Adagrad update rule.
+2. In zt = y*lambda*z(t-1) + v(s1,wt), why the v(st,wt) term not normalised with (1-y). Wouldnt the norm
+of zt keep on increasing with time?
+3. Can the intuition of the proof of true online TD(lambda) be discussed in the class, which claims the 
+sequence is same as online-lambda return algortihms?
+4. Pg 308, can you explain why psuedo termination is needed? I couldnt understand some last 3-4 lines 
+of the 1st paragraph of Pg 308.
+
+Summary:
+In this chapter, eligibility traces have bene introduced. They are used to maintain a state of 
+last few previous actions to update the weights in the current state. The lambda return is a 
+tradeoff factor between monte carlo and td return. Having lambda = 0 , makes the return a td(0)
+return and lamdba =1, makes the return a monte carlo return.
+The offline lambda update algorithm is equivalent to n-step bootstrapping algorithm.
+Both n-step and offline lambda are forward view algorithms, wherein the updates are applied in 
+future. One major issue with offline lambda is that the lambda return is computationally expensive
+due to its dependence on an arbitrary large n. Similar to TD n-step algorithm, the updates can 
+be truncated to a fixed n. For each step the return is maintained by adding the weighted td-error. 
+The update step for weights is similar to the one used for the one used for offline td lambda.
+
+The online of two above apporaches have been described in the book.
+TD(lambda) approximates offline td lambda makes use of eligibility traces.
+    z−1=0,
+    zt=y*lambda*zt−1 + dv(St,wt), 0<t<T,
+    wt+1=wt + alpha*(tderror)*zt.
+
+This is a semigradient update.  This update has backward view and is completely online
+in contrast with MC updates. The linear TD(lambda) converges in the on-policy case.
+
+Similarly, an online update rule for truncated td lambda can be defined.
+In this, updates for each time step are made with the limited horizen that is available.
+At the next time step all updates for previous states are computed and the weight vector 
+is updated accordingly.The eligibility trace equivalent for online approximation of ttd 
+is defined as follows:-
+    zt=y*lambda*zt−1 +(1 − alpha*y*z(t −1)*xt)xt
+    w(t+1)= wt + alpha*td_error*zt+ alpha*(wt%xt-w(t-i)*xt)(zt-xt)
+
+Similar analysis can be done for q(s,a) function approximation. Eligibility traces in 
+SARSA are defined in the same way.
+
