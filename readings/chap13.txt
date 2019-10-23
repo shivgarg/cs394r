@@ -1,0 +1,37 @@
+Questions:
+1. On pg 322, the advantages of policy gradient have been discussed. It has been mentioned that deterministic policies
+are not possible wth e-greedy methods. Aren't e-greedy just for exploration purposes and in the deployment stage
+, the deterministic policy determined by the action value function is chosen?
+2. In pseudo code of REINFORCE: Monte Carlo Policy gradient, why gamma has been used in both Gt and 
+the sgd step? Shouldn't it be used in the first step only?
+3. On Pg 331, in action-critic methods, it has been mentioned introducing bias via bootstrapping
+and having reliance on state representaion is benficial as it reduces variance and acclerates learning.
+Can you please explain this claim?
+4. If the optimial policy is stochastic with multiple optimal actions in the continuous action case, 
+then normal distribution would fail to capture this information. How to deal with these situations?
+
+
+Summary:
+
+The chapter discusses policy gradient methods. The main difference here is that there is no explicit approximation of state actiona values. 
+Each state-action has a preference according to which actions are chosen. The preference function can be based on value function but it is not 
+required to be that. The policies can be parameterized using softmax over preference function.
+
+The performance function is chosen to be the value function of the optimal policy.  The policy gradient theorem
+gives the relationship between the stationary distribution of the current policy and the state-action function.
+The REINFORCE algorithm applies updates to the parameters similar to monte carlo methods. 
+In each step of the episode, the weights are updated proportional to the return and the probability of chosing that action.
+The updates in REINFORCE involve samples from each step of episode, therefore they have high variance.
+Introduction of a baseline reduces the variance of the update.The baseline should be dependent only 
+on the state and must be independent of the state. Mostly it is chosen as the value estimate of a state.
+Since the REINFORCE algorithm performs the update in a monte carlo way, the value is estimated by 
+monte carlo updates methods.
+
+Actor-Critic methods involve both policy and value function estimation. The extension of REINFORCE
+is based on the principles of TD(0), Sarsa and Q-Learning. The return needs to be changed in the 
+REINFORCE algorithm to one-step ,or n-step bootstrapped or lambda return.  The eligibility trace 
+also transfer similarly.
+
+For the continuing case, the analysis is similar. Average reward is optimised instead of return.
+For continuous action space, the action space is modelled with a normal distribution.
+
