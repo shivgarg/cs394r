@@ -1,0 +1,11 @@
+Questions:
+1. For data generation for gammon, are two instances of NN created to play against each other 
+or one NN is enough.?
+2. How can symmtery be coded in the problem formulation? Like there exists states which are symmetric 
+in the sense, that one is good for white player and the other one is good in the exactly same way for black player.
+3. Why there was no exploration step during game data generation for Gammon?
+4. What is the intutition behind storing duplciate weights in a second network after c updates(Atari Games DQN)?
+How does it solve the problem caused by semi-gradient updates?
+5. Have there been off-policy approaches to these problems?
+6. What are some good techniques to build the replay buffer? Is there any smart way to store 
+the experience so as to gain maximum utility given limited storage?
