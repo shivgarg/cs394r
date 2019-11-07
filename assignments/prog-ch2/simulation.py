@@ -12,7 +12,6 @@ opt_action_average = np.zeros(RUN_LENGTH+1)
 for j in range(NUM_TRIALS):
     reward_incremental= np.zeros(RUN_LENGTH+1)
     opt_action_incremental = np.zeros(RUN_LENGTH+1)
-
     mean = np.zeros(NUM_ARMS)
     var = np.ones(NUM_ARMS)
     qestimates = np.zeros(NUM_ARMS)
@@ -23,18 +22,18 @@ for j in range(NUM_TRIALS):
         if greedy:
             arm = np.argmax(qestimates)
         r = np.random.normal(mean[arm],var[arm])
-        cumulative_rew = reward_incremental[i-1]+(r-reward_incremental[i-1])/i
+        cumulative_rew = r#reward_incremental[i-1]+(r-reward_incremental[i-1])/i
 
         reward_incremental[i] = cumulative_rew
         if np.argmax(mean) == arm:
-            opt_action_incremental[i] = opt_action_incremental[i-1] + (1-opt_action_incremental[i-1])/i
+            opt_action_incremental[i] = 1#opt_action_incremental[i-1] + (1-opt_action_incremental[i-1])/i
         else:
-            opt_action_incremental[i] = opt_action_incremental[i-1]*(i-1)/i
+            opt_action_incremental[i] = 0#opt_action_incremental[i-1]*(i-1)/i
         qestimates_support[arm] +=1
         qestimates[arm] = qestimates[arm] + (r-qestimates[arm])/qestimates_support[arm]
         # Non-stationary 
-        for i in range(NUM_ARMS):
-            mean[i] += np.random.normal(0,0.01)
+        for k in range(NUM_ARMS):
+            mean[k] += np.random.normal(0,0.01)
     reward_average = (reward_average*j + reward_incremental)/(j+1)
     opt_action_average = (opt_action_average*j + opt_action_incremental)/(j+1)
 
@@ -45,7 +44,6 @@ opt_action_alpha = np.zeros(RUN_LENGTH+1)
 for j in range(NUM_TRIALS):
     reward_constant = np.zeros(RUN_LENGTH+1)
     opt_action_constant = np.zeros(RUN_LENGTH+1)
-
     mean = np.zeros(NUM_ARMS)
     var = np.ones(NUM_ARMS)
     qestimates = np.zeros(NUM_ARMS)
@@ -57,18 +55,17 @@ for j in range(NUM_TRIALS):
         if greedy:
             arm = np.argmax(qestimates)
         r = np.random.normal(mean[arm],var[arm])
-        cumulative_rew = reward_constant[i-1]+(r-reward_constant[i-1])/i
+        cumulative_rew = r#reward_constant[i-1]+(r-reward_constant[i-1])/i
         reward_constant[i] = cumulative_rew
         if np.argmax(mean) == arm:
-            opt_action_constant[i] = opt_action_constant[i-1] + (1-opt_action_constant[i-1])/i
+            opt_action_constant[i] = 1#opt_action_constant[i-1] + (1-opt_action_constant[i-1])/i
         else:
-            opt_action_constant[i] = opt_action_constant[i-1]*(i-1)/i
+            opt_action_constant[i] = 0#opt_action_constant[i-1]*(i-1)/i
         qestimates[arm] = qestimates[arm] + (r-qestimates[arm])*alpha
         # Non-stationary 
-        for i in range(NUM_ARMS):
-            mean[i] += np.random.normal(0,0.01)
+        for k in range(NUM_ARMS):
+            mean[k] += np.random.normal(0,0.01)
     reward_alpha = (reward_alpha*j + reward_constant)/(j+1)
     opt_action_alpha = (opt_action_alpha*j + opt_action_constant)/(j+1)
 
-print(len(reward_average[1:]))
 np.savetxt(sys.argv[1], (reward_average[1:], opt_action_average[1:], reward_alpha[1:], opt_action_alpha[1:]))
