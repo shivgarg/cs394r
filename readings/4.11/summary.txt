@@ -1,0 +1,28 @@
+Questions:
+1. How is knowledge transferred typically from one domain to another in RL? Usually, what types of tasks are well suited for transfer learning?
+2. How are abstractions different from function approximation? the premise there is that similar states have very similar feature and thus similar values.
+3. Can you explain the interrupting options concept from the paper? How are option policy and main policy related when we choose to switch options?
+Does the exploration-exploitation tradeoff hold here? 
+
+Summary:
+The first paper discusses the idea of abstraction in an environment. Several pros of having and learning abstractions are discussed.
+Abstractions enable exploration and generalisation is various domains. They encode the domain structure and help in generalisation.
+With compact representation, more exploration can be done since the exploration requires less computation due to compressed representation.
+Secondly, abstractions help in faster learning of simple policies which maybe sub optimal but are still better than non-converged policies.
+These can be made better incremently by changing the resolution of abstractions.  Knowledge can also be transferred among tasks via abstarctions 
+since they are indepenedent of policy and goal and can be shared by different goals.
+
+The second paper introduces the notion of temporal abstractions. For a given task, the sequence of actions
+is divided into segments where each segemnt denotes a sub task. The sub task 
+is independent from the final goal. It can be learned independently from the problem in hand.
+From each state, a set of options(segement of actions for next time steps) are possible.
+Options has a policy, a termination condition (set of states) and the set of states from where
+that option is available. The options are not necessarily markov in nature. Some options policy 
+require the full history. This helps in a lot of policies like time expiration of policy.
+The theory of state-value functions for actions carries forward to state option scenarios. Analogous 
+bellman equations exist for value and value-action functions. 
+Value iteration and Q learning work similarly on the state, option functions.
+The option policy can be improved while executing the policy. The option policy can be re-evaluated and alternate 
+policy is shown to be better by policy iteration theorem. For markov options, the options policy can be
+learned in an off-policy way. Using this value functions for various options are learnt while using a 
+behavioural policy. 
