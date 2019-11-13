@@ -1,0 +1,32 @@
+Questions:
+1. In apprenticeship learning, if we already have access to expert policy, why do we bother
+learning a policy? In imitation learning, we have some data on state-action pairs from an expert,
+but from what I understood here we have the expert policy itself.
+2. How the scales of Q function from RL and H function in TAMER balanced? Wouldn't it be a issue when the 
+scales of rewards is different, with one method dominating over the other.
+3. It has been mentioned that the approaches discussed in Knox et.al does not apply to policy 
+search algorithms.But can't the advantage term used in policy gradients incorporate the Q 
+function estimated using both rl and human inputs?
+4. Can you exaplin why the second restriction(Pg 3 ) section 3 needed? 
+
+
+Summary
+In apprenticeship learning, policy learning is tackled using inverse reinforcement learning.
+There are a couple of assumptions in the paper. Firstly, access to expert is required . Secondly,
+th eexpert tries to optimise the policy in accrodance to a linear reward function dependent on 
+the state features.  The main motivation of the approach is to learn the expert reward function
+and minimize the difference between expert and learnt policy. The claim is that via this approach,
+a policy which is close to the expert policy whill be found, the reward function may not match 
+the exact reward function optimised by the expert.  The basic algorithmic loop is:
+
+1. Find the linear weight vector that maximises the error in the expert and current policy.
+2. If error less that threshold, the policy has been found.
+3. Learn a new policy by assuming the weight vector learnt in step1.  Repeat.
+
+
+The second paper discusses combining human reward shaping with the reinforcement learning 
+reward function. The work focuses on adding both RL rewards and human rewards to TAMER 
+framework. It augments the TAMER framwork by proposing eight different ways of combining
+rl and human rewards .  The main motivation of the paper is that RL rewards are flawless 
+ and sparse and Humar rewards are rich, dense but flawed. So the objective is to combine both
+ to get the best of both worlds. 

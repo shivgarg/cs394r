@@ -74,8 +74,8 @@ def off_policy_mc_prediction_weighted_importance_sampling(
     Q = np.array(initQ)
     C = np.zeros_like(Q)
     for traj in trajs:
-        G = 0
-        W = 1
+        G = 0.0
+        W = 1.0
         for step in reversed(traj):
             s = step[0]
             a = step[1]
