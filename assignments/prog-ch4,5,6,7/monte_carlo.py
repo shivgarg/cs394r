@@ -69,8 +69,6 @@ def off_policy_mc_prediction_weighted_importance_sampling(
     # sampling (Hint: Sutton Book p. 110, every-visit implementation is fine)
     #####################
 
-    nS = env_spec.nS
-    nA = env_spec.nA
     Q = np.array(initQ)
     C = np.zeros_like(Q)
     for traj in trajs:
@@ -81,6 +79,8 @@ def off_policy_mc_prediction_weighted_importance_sampling(
             a = step[1]
             r = step[2]
             G = env_spec.gamma*G + r
+            if W == 0:
+                break
             C[s][a] += W
             Q[s][a] += (W/C[s][a])*(G-Q[s][a])
             W = W*pi.action_prob(s,a)/bpi.action_prob(s,a)

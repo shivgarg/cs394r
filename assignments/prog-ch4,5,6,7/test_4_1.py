@@ -161,14 +161,14 @@ if __name__ == "__main__":
     Q_est_wis = mc_wis(grid_world.spec, trajs, behavior_policy, behavior_policy,
                        np.zeros((grid_world.spec.nS, grid_world.spec.nA)))
     # 3-step TD with alpha = 0.005
-    #V_est_td = ntd(grid_world.spec, trajs, 3, 0.005, np.zeros((grid_world.spec.nS)))
+    V_est_td = ntd(grid_world.spec, trajs, 3, 0.005, np.zeros((grid_world.spec.nS)))
 
     print("On random policy value OIS: ")
     print(Q2V(Q_est_ois, behavior_policy).reshape((4, 4)))
     print("On random policy value WIS: ")
     print(Q2V(Q_est_wis, behavior_policy).reshape((4, 4)))
     print("3-step TD value estimation on random policy: ")
-    #print(V_est_td.reshape((4, 4)))
+    print(V_est_td.reshape((4, 4)))
 
     # Off-policy evaluation test with optimal policy
     Q_est_ois = mc_ois(grid_world.spec, trajs, behavior_policy, pi, np.zeros((grid_world.spec.nS, grid_world.spec.nA)))
@@ -180,9 +180,9 @@ if __name__ == "__main__":
 
     # Off-policy SARSA
     # 3-step with alpha = 0.01, should converge to v*
-    #Q_star_est, pi_star_est = nsarsa(grid_world.spec, trajs, behavior_policy, n=3, alpha=0.01,
-                                     #initQ=np.zeros((grid_world.spec.nS, grid_world.spec.nA)))
-    #print("3-step SARSA off policy optimal value est. :")
-    #print(Q2V(Q_star_est, pi_star_est).reshape((4, 4)))
-    #print("3-step SARSA off policy optimal policy :")
-    #print(visualize(pi_star_est).reshape((4, 4)))
+    Q_star_est, pi_star_est = nsarsa(grid_world.spec, trajs, behavior_policy, n=3, alpha=0.01,
+                                     initQ=np.zeros((grid_world.spec.nS, grid_world.spec.nA)))
+    print("3-step SARSA off policy optimal value est. :")
+    print(Q2V(Q_star_est, pi_star_est).reshape((4, 4)))
+    print("3-step SARSA off policy optimal policy :")
+    print(visualize(pi_star_est).reshape((4, 4)))
