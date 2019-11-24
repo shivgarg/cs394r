@@ -1,0 +1,31 @@
+
+
+
+
+In this programming assignment, you will implement several algorithms introduced in Chapter 4, 5, 6, and 7. General instructions and the requirements can be seen in the attached skeleton code.
+
+
+
+First, you need to implement two dynamic programming algorithms: value prediction and value iteration. Open dp.py, insert your code, and upload the file below. Please do not change the function interface. In order to know how the functions will be called for grading, please checkout the provided test.py and other class interfaces defined in env.py and policy.py.
+
+
+
+Second, you need to implement an off-policy Monte-Carlo evaluation method. You need to write two different versions: (1) ordinary important sampling and (2) weighted importance sampling. Open policy.py, insert your code, and upload the file. Again, please do not change the function interface. Your code should work without modifying any of test.py.
+
+
+
+Last, implement (1) On-policy n-step TD for evaluating a policy and (2) off-policy n-step SARSA for learning an optimal policy. Open n_step_bootstrap.py, insert your code, and upload the file.
+
+
+
+test.py includes some rudimentary testing code including a very simple MDP. Your code will be tested on different environments than the provided one, so please implement a more difficult MDP (by implementing an environment yourself), and test your algorithm thoroughly before you submit. The goal of this assignment is getting a deeper understanding of RL with experience of your own.  It is very important to implement algorithms very carefully since these algorithms can fail due to minor implementation errors, which are almost impossible to debug. Implementing environments and reproducing figures in the textbook will be good practice before submission.
+
+
+
+You can share your environments with your colleagues on Piazza.  We especially encourage you to develop and share environments that contain interesting characteristics, such as infinite variance as shown in Figure 5.4 of the textbook.
+
+
+
+We hope you find this assignment to be both rewarding and fun.  Enjoy!
+
+

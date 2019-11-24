@@ -1,0 +1,22 @@
+Questions:
+1. What does it mean by safety of RL algorithms? How is it quantified for different domains?
+2. Bowling et al claim that many multi-agent algorithms do not achieve both optimality and 
+convergence. I could not understand why is this the case.
+3. Could you discuss the Brown et al paper especially the Algorithm 1 on pg 4?
+
+Summary:-
+Littman et. al introduces Q-learnign framework for multi-agent environments. In the paper a 
+special case of zero-sum games are considered in which the players have opposite goals.
+The formulation of the gae is represented as a matrix game. The q value function updates are 
+updated in a minimax format i.e. maximising the worst case scenario. In this the opponent 
+is assumed to be behaving optimally. The learning paradigm tries to learn the Q values which
+maximise the return given the opponent plays optimially to maximise the rewward. Value iteration
+can be used to learn both the V and Q values.
+Bowling et al introduce the notion of rationality and convergence in multi-agent systems.
+They claim that existing algorithms do not converge to optimal policies wrt to opponents, or
+do not converge at all. They introduce a learning algorithm which has an adaptive learning rate
+to guarantee both convergence and optimality. 
+Brown et al focus on the problem of robust policy learning. They focus to develop performance bounds
+for policies learnt using IRL. The difference in expected return is bound in accordance to an 
+unknown expert reward function. The reward function is sampled given the demonstrations in a bayesian way,
+by using bayesian IRL to model probability of demonstration given reward function.
