@@ -1,0 +1,14 @@
+Soft Actor Critic:
+It is an off-policy algorithm to learn a policy by using policy gradients. It optimises
+a dual loss function, minimising the policy loss and maximising the entropy. This 
+loss promotes the policy to be optimal but be more exploratory. A double Q-learning
+is used to avoid the maximisation bias. In essense, four networks are learnt , one 
+for policy, two for q-learning and one for value function is used. 
+
+MAML:
+The paper describes a method to train deep neural networks which can easily adapt to 
+new tasks. A framework is proposed to train network in such a way that it generalises 
+to the new tasks with very little training data. The framework has been described for 
+varied problems spanning supervised learnign and reinforcement learning.
+  
+
